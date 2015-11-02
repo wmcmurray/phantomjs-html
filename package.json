@@ -1,0 +1,23 @@
+{
+  "name": "phantomjs-html",
+  "version": "0.1.0",
+  "description": "Render URLs and return their HTML content. Mainly used for SEO of one-pager apps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "phantomjs",
+    "html",
+    "render",
+    "seo",
+    "one-pager",
+    "SPA"
+  ],
+  "author": "William McMurray <tiwilinlove@hotmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "phantomjs": "^1.9.18"
+  }
+}
