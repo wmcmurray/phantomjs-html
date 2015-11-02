@@ -1,8 +1,12 @@
 {
   "name": "phantomjs-html",
-  "version": "0.1.0",
-  "description": "Render URLs and return their HTML content. Mainly used for SEO of one-pager apps.",
+  "version": "0.1.1",
+  "description": "Render URLs and return their HTML content.",
   "main": "index.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/wmcmurray/phantomjs-html.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
