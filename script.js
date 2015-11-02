@@ -5,22 +5,20 @@ var url = args[1];
 
 page.open(url, function (status) {
   if (status !== 'success') {
-    console.log('Unable to access network');
+    system.stderr.write('Unable to access network');
     phantom.exit();
   } else {
-    var html = '';
-
     var getHtml = function(){
-      html = page.evaluate(function () {
+      var ready = page.evaluate(function () {
         if(typeof window.phantomjsHtmlReady == 'undefined' || window.phantomjsHtmlReady){
-          return document.getElementsByTagName('html')[0].innerHTML;
+          return true;
         } else {
-          return null;
+          return false;
         }
       });
 
-      if(html){
-        console.log(html);
+      if(ready){
+        system.stdout.write(page.content);
         phantom.exit();
       } else {
         // delay the loop a bit...

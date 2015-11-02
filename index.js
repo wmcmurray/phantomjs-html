@@ -83,7 +83,7 @@ var phantomjsHtml = module.exports = {
         
         phantomjsHtml.getHTML(requestURL, function(err, output){
           if(err){
-            console.log('ERROR', err);
+            console.log('PHANTOMJS-HTML ERROR :', err);
             next();
           } else {
             // remove script tags to prevent JS to be executed (because it has already been executed)
@@ -175,7 +175,7 @@ var phantomjsHtml = module.exports = {
       if(stderr) {
         callback(stderr, null);
       } else {        
-        callback(null, stdout);
+        callback(null, stdout.toString());
       }
     });
   }
