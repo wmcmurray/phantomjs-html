@@ -10,6 +10,7 @@ var phantomjsHtml = module.exports = {
     'bingbot',
     'baiduspider',
     'facebookexternalhit',
+    'Facebot',
     'twitterbot',
     'rogerbot',
     'linkedinbot',
