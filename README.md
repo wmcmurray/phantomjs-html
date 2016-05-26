@@ -34,7 +34,9 @@ This middleware need to be used before any routing is done. It will detect if th
 
 ```js
 // output PhantomJS render of pages if the request is made by a crawler
-app.use(phantomjsHtml.middleware.SEO);
+app.use(phantomjsHtml.middleware.SEO({
+  overLocalhost: true
+}));
 ```
 
 

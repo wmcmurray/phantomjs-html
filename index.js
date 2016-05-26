@@ -27,7 +27,6 @@ var phantomjsHtml = module.exports = {
     'Applebot'
   ],
 
-
   staticFilesExtensions: [
     '.js',
     '.css',
@@ -74,27 +73,37 @@ var phantomjsHtml = module.exports = {
   middleware: {
     /**
      *  Middleware used to output HTML rendering of the page when needed
+     *  @param {object} userOptions = List of options
      */
-    SEO: function(req, res, next){
-      if(phantomjsHtml.needHtmlOutput(req)) {
-        var requestURL = req.protocol + '://' + req.get('host') + req.originalUrl;
+    SEO: function(userOptions){
+      var defaultOpts = {
+        overLocalhost: false // {bool} if the requests will be done on the localhost app with app port
+      };
 
-        // @todo: there is probably a better way to do this...
-        requestURL = requestURL.replace('?_escaped_fragment_=','');
-        
-        phantomjsHtml.getHTML(requestURL, function(err, output){
-          if(err){
-            console.log('PHANTOMJS-HTML ERROR :', err);
-            next();
-          } else {
-            // remove script tags to prevent JS to be executed (because it has already been executed)
-            output = output.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,'');
+      var opts = Object.assign(defaultOpts, userOptions || {});
 
-            res.send(output);
-          }
-        })
-      } else {
-        next();
+      return function(req, res, next){
+        if(phantomjsHtml.needHtmlOutput(req)) {
+          var domain = opts.overLocalhost ? 'http://localhost:' + req.app.get('port') : req.protocol + '://' + req.get('host');
+          var requestURL = domain + req.originalUrl;
+
+          // @todo: there is probably a better way to do this...
+          requestURL = requestURL.replace('?_escaped_fragment_=','');
+          
+          phantomjsHtml.getHTML(requestURL, function(err, output){
+            if(err){
+              console.log('PHANTOMJS-HTML ERROR :', err);
+              next();
+            } else {
+              // remove script tags to prevent JS to be executed (because it has already been executed)
+              output = output.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,'');
+
+              res.send(output);
+            }
+          })
+        } else {
+          next();
+        }
       }
     }
   },
