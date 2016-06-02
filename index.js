@@ -88,7 +88,7 @@ var phantomjsHtml = module.exports = {
           var requestURL = domain + req.originalUrl;
 
           // @todo: there is probably a better way to do this...
-          requestURL = requestURL.replace('?_escaped_fragment_=','');
+          requestURL = requestURL.replace(/(\?|&)_escaped_fragment_=/,'');
           
           phantomjsHtml.getHTML(requestURL, function(err, output){
             if(err){
