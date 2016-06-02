@@ -1,6 +1,6 @@
 {
   "name": "phantomjs-html",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render URLs and return their HTML content.",
   "main": "index.js",
   "repository" : {
