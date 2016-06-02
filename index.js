@@ -87,8 +87,7 @@ var phantomjsHtml = module.exports = {
           var domain = opts.overLocalhost ? 'http://localhost:' + req.app.get('port') : req.protocol + '://' + req.get('host');
           var requestURL = domain + req.originalUrl;
 
-          // @todo: there is probably a better way to do this...
-          requestURL = requestURL.replace(/(\?|&)_escaped_fragment_=/,'');
+          requestURL = requestURL.replace(/(\?|&)_escaped_fragment_=?/,'');
           
           phantomjsHtml.getHTML(requestURL, function(err, output){
             if(err){
@@ -156,6 +155,12 @@ var phantomjsHtml = module.exports = {
 
     // ommit static files
     if(phantomjsHtml.isStaticFile(req)) {
+      return false;
+    }
+
+    // prevent request initiated by phantomJS to be marked as "needing phantomjs rendering"
+    // because otherwise it could end up in a nasty phantomjs infinite loop...
+    if(phantomjsHtml.isPhantomJs(req)) {
       return false;
     }
 
