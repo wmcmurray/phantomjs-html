@@ -1,5 +1,6 @@
 var path = require('path');
 var url = require('url');
+var merge = require('merge');
 var childProcess = require('child_process');
 var phantomjs = require('phantomjs');
 
@@ -80,7 +81,7 @@ var phantomjsHtml = module.exports = {
         overLocalhost: false // {bool} if the requests will be done on the localhost app with app port
       };
 
-      var opts = Object.assign(defaultOpts, userOptions || {});
+      var opts = merge(defaultOpts, userOptions || {});
 
       return function(req, res, next){
         if(phantomjsHtml.needHtmlOutput(req)) {

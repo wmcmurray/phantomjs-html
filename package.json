@@ -1,11 +1,11 @@
 {
   "name": "phantomjs-html",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Render URLs and return their HTML content.",
   "main": "index.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/wmcmurray/phantomjs-html.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmcmurray/phantomjs-html.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,7 @@
   "author": "William McMurray <tiwilinlove@hotmail.com>",
   "license": "ISC",
   "dependencies": {
+    "merge": "^1.2.0",
     "phantomjs": "^1.9.18"
   }
 }
