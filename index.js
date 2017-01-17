@@ -89,7 +89,7 @@ var phantomjsHtml = module.exports = {
           var requestURL = domain + req.originalUrl;
 
           requestURL = requestURL.replace(/(\?|&)_escaped_fragment_=?/,'');
-          
+
           phantomjsHtml.getHTML(requestURL, function(err, output){
             if(err){
               console.log('PHANTOMJS-HTML ERROR :', err);
@@ -167,7 +167,7 @@ var phantomjsHtml = module.exports = {
 
     // check _escaped_fragment_
     var parsedQuery = url.parse(req.url, true).query;
-    if(parsedQuery && parsedQuery.hasOwnProperty('_escaped_fragment_')){
+    if(parsedQuery && '_escaped_fragment_' in parsedQuery){
       return true;
     }
 
@@ -186,11 +186,11 @@ var phantomjsHtml = module.exports = {
     var childArgs = [
       path.join(__dirname, 'script.js'), URL
     ];
-     
+
     childProcess.execFile(phantomjs.path, childArgs, function(err, stdout, stderr) {
       if(stderr) {
         callback(stderr, null);
-      } else {        
+      } else {
         callback(null, stdout.toString());
       }
     });
